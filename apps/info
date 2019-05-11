@@ -1,4 +1,4 @@
-./manage.py runserver 0.0.0.0:5678
+./manage.py runserver 0.0.0.0:3389
 
 现任务：
 希语文件名问题，需要全部删除，换用数字英文的
