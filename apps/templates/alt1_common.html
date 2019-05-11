@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Alt1_common</title>
+</head>
+
+<script type="text/javascript">
+    function display(id){
+        var traget=document.getElementById(id);
+        if(traget.style.visibility=="hidden"){
+            traget.style.visibility="";
+        }else{
+            traget.style.visibility="hidden";
+      }
+   }
+</script>
+
+<body>
+
+<p>
+<form action="/accept-cmd-alt1-common" method="get">
+    <input type="hidden" name="every" value={{ every_info }}>
+    {% ifequal every_info 'common' %}
+        {% include "input_cmd_one.html" %}
+    {% else %}
+        {% include "input_cmd_alt1.html" %}
+    {% endifequal %}
+</form>
+
+<hr>
+<font size="8">
+{{ con }}
+<hr>
+
+{% if env  %}
+{{ env }}
+<hr>
+{% endif %}
+
+{% if ext  %}
+{{ ext }}
+<hr>
+{% endif %}
+</font>
+
+<u><h1>{{ every_info }}</h1></u>
+<br>
+
+<p>{{ every }} {{ cmd }}</p>
+{{ showinfo }} <a href=/alt1234> 回到主页 </a>
+
+</body>
+</html>

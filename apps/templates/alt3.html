@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Alt3</title>
+</head>
+
+<script type="text/javascript">
+    function display(id){
+        var traget=document.getElementById(id);
+        if(traget.style.visibility=="hidden"){
+            traget.style.visibility="";
+        }else{
+            traget.style.visibility="hidden";
+      }
+   }
+</script>
+
+<body>
+<p>
+</p>
+<form id="form" action="/accept-cmd-alt3" method="get">
+    <input type="hidden" name="every" value={{ every_info }}>
+    {% ifequal every_info 'common' %}
+        {% include "input_cmd_one.html" %}
+    {% else %}
+        {% include "input_cmd.html" %}
+    {% endifequal %}
+</form>
+
+<font size="7">
+{% ifequal every_info 'common' %}
+    {{ con }}
+    <hr>
+    <div id="lb" style="color:gray" >
+    {{ env }}
+    </div>
+    <audio id="myAudio1" autoplay src="/static/grace_voice/{{ ext }}.mp3" />
+    <audio id="myAudio2" src="/static/grace_voice/{{ ext }}.mp3" />
+    <audio id="myAudio3" src="/static/grace_voice/{{ ext }}.mp3" />
+    <script>
+        var aud1 = document.getElementById("myAudio1");
+        var aud2 = document.getElementById("myAudio2");
+        var aud3 = document.getElementById("myAudio3");
+        aud1.onended = function() {
+            //按时间算重复两三遍或者不重复
+            //因为和python3注释不同导致错误过...
+            //document.getElementById("form").submit();
+            aud2.play()
+        }; 
+        aud2.onended = function() {
+            document.getElementById("form").submit();
+            aud3.play()
+        }; 
+        aud3.onended = function() {
+            document.getElementById("form").submit();
+        }; 
+    </script>
+{% else %}
+    <input type="button" style="width:960px;height:100px;" value="" onclick="display('lb')">
+    <br>
+    {{ con }}
+    <hr>
+    <div id="lb" style="visibility:hidden">
+    {{ env }}
+    </div>
+    <hr>
+    <br>
+    <u>{{ every_info }}</u>
+    <br>
+    <audio id="myAudio1" autoplay src="/static/grace_voice/{{ ext }}.mp3" />
+    <audio id="myAudio2" src="/static/grace_voice/{{ ext }}.mp3" />
+    <audio id="myAudio3" src="/static/grace_voice/{{ ext }}.mp3" />
+    <script>
+        var aud1 = document.getElementById("myAudio1");
+        var aud2 = document.getElementById("myAudio2");
+        var aud3 = document.getElementById("myAudio3");
+        aud1.onended = function() {
+            aud2.play()
+        }; 
+        aud2.onended = function() {
+            aud3.play()
+        }; 
+        aud3.onended = function() {
+            document.getElementById("form").submit();
+        }; 
+    </script>
+{% endifequal %}
+</font>
+
+<p align="right">
+{{ showinfo }} <a href=/alt1234> 回到主页 </a>
+</p>
+
+<p>{{ every }} {{ cmd }}</p>
+
+</body>
+</html>

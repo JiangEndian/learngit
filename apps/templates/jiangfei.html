@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Alt</title>
+</head>
+
+<script type="text/javascript">
+    function display(id){
+        var traget=document.getElementById(id);
+        if(traget.style.visibility=="hidden"){
+            traget.style.visibility="";
+        }else{
+            traget.style.visibility="hidden";
+      }
+   }
+</script>
+
+<body>
+<font size="7">
+
+<p>
+<form action="/accept_cmd_jiangfei" method="get">
+    <input type="hidden" name="every" value={{ every_info }}>
+    {% ifequal every_info 'common' %}
+        {% ifequal con '已复习' %}
+        {% else %}
+            {% include "input_cmd_one.html" %}
+        {% endifequal %}
+    {% else %}
+        {% ifequal con '已复习' %}
+        {% else %}
+            {% include "input_cmd.html" %}
+        {% endifequal %}
+    {% endifequal %}
+</form>
+
+{% ifequal every_info 'common' %}
+    {{ con }}
+    <hr>
+    <div id="lb" style="color:gray">
+    {{ env }}
+    </div>
+{% else %}
+    <input type="button" style="width:960px;height:100px;" value="Show/Hide" onclick="display('lb')">
+    <br>
+    {{ con }}
+    <hr>
+    <div id="lb" style="visibility:hidden">
+    {{ env }}
+    </div>
+{% endifequal %}
+<hr>
+</font>
+
+<u><h1>{{ every_info }}</h1></u>
+<p>
+<p>
+<audio controls="controls" autoplay="autoplay" src="/static/grace_voice/{{ con }}.mp3" loop="loop"/>
+Your browser does not support the audio element.
+</audio>
+<p>
+
+<p>{{ every }} {{ cmd }}</p>
+{{ showinfo }} 
+
+</body>
+</html>
